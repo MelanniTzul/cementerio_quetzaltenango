@@ -95,6 +95,7 @@ Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('cont
 // Route::get('/contratos/{id}', [ContratoController::class, 'show'])->name('contratos.show');
 
 use App\Http\Controllers\OcupanteController;
+use App\Http\Controllers\ResponsableController;
 
 //ocupante
 // Ver formulario de creación
@@ -117,4 +118,23 @@ Route::get('/ocupantes', [OcupanteController::class, 'index'])->name('ocupantes.
 
   // Eliminar (borrado lógico)
   Route::delete('/ocupantes/{id}', [OcupanteController::class, 'destroy'])->name('ocupantes.destroy')->middleware('is_admin');
-require __DIR__ . '/auth.php';
+
+// Mostrar formulario de creación
+Route::get('/responsables/create', [ResponsableController::class, 'create'])->name('responsables.create');
+
+// Guardar nuevo responsable
+Route::post('/responsables', [ResponsableController::class, 'store'])->name('responsables.store');
+
+// Mostrar formulario de edición
+Route::get('/responsables/{id}/edit', [ResponsableController::class, 'edit'])->name('responsables.edit');
+
+// Actualizar responsable
+Route::put('/responsables/{id}', [ResponsableController::class, 'update'])->name('responsables.update');
+
+// Ver lista de responsables
+Route::get('/responsables', [ResponsableController::class, 'index'])->name('responsables.index');
+
+// (Opcional) Ver detalle de un responsable
+Route::get('/responsables/{id}', [ResponsableController::class, 'show'])->name('responsables.show');
+
+  require __DIR__ . '/auth.php';

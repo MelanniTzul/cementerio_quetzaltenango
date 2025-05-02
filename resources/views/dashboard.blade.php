@@ -35,7 +35,7 @@
                             <p class="text-sm text-gray-600">Crea ocupante para nicho.</p>
                         </div>
                     </a>
-                    <a href="{{ route('nichos.index') }}">
+                    <a href="{{ route('responsables.index') }}">
                         <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
                             <h2 class="font-semibold text-lg">Creación Responsables</h2>
                             <p class="text-sm text-gray-600">Crea, Responsable para los nicho.</p>
