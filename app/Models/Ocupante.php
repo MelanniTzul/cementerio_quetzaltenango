@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ocupante extends Model
 {
     protected $table = 'ocupante';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',
@@ -21,5 +22,19 @@ class Ocupante extends Model
         'personaje_historico',
     ];
 
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'id_municipio');
+    }
+
+    public function genero()
+    {
+        return $this->belongsTo(Genero::class, 'id_genero');
+    }
+
+    public function nicho()
+    {
+        return $this->belongsTo(Nicho::class, 'id_nicho');
+    }
 
 }

@@ -29,7 +29,7 @@
                             <p class="text-sm text-gray-600">Consulta, agrega o modifica los nichos disponibles.</p>
                         </div>
                     </a>
-                    <a href="{{ route('nichos.index') }}">
+                    <a href="{{ route('ocupantes.store') }}">
                         <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
                             <h2 class="font-semibold text-lg">Creación Ocupantes</h2>
                             <p class="text-sm text-gray-600">Crea ocupante para nicho.</p>

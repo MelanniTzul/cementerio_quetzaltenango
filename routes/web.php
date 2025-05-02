@@ -94,5 +94,27 @@ Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('cont
 // Ruta para ver los detalles de un contrato (opcional)
 // Route::get('/contratos/{id}', [ContratoController::class, 'show'])->name('contratos.show');
 
+use App\Http\Controllers\OcupanteController;
 
+//ocupante
+// Ver formulario de creación
+Route::get('/ocupantes/create', [OcupanteController::class, 'create'])->name('ocupantes.create')->middleware('is_admin');
+
+// Guardar ocupante (crear)
+Route::post('/ocupantes', [OcupanteController::class, 'store'])->name('ocupantes.store')->middleware('is_admin');
+
+// Ver formulario de edición
+Route::get('/ocupantes/{id}/edit', [OcupanteController::class, 'edit'])->name('ocupantes.edit')->middleware('is_admin');
+
+// Actualizar ocupante
+Route::put('/ocupantes/{id}', [OcupanteController::class, 'update'])->name('ocupantes.update')->middleware('is_admin');
+
+// Ver vista de un ocupante (detalle)
+Route::get('/ocupantes/{id}', [OcupanteController::class, 'show'])->name('ocupantes.show')->middleware('is_admin');
+
+// (Opcional) Listar todos
+Route::get('/ocupantes', [OcupanteController::class, 'index'])->name('ocupantes.index')->middleware('is_admin');
+
+  // Eliminar (borrado lógico)
+  Route::delete('/ocupantes/{id}', [OcupanteController::class, 'destroy'])->name('ocupantes.destroy')->middleware('is_admin');
 require __DIR__ . '/auth.php';
