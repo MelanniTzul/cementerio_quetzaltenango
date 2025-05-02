@@ -22,9 +22,12 @@
                 <h3 class="text-2xl font-bold mb-6">Menu</h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <a href="#" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
-                        <h4 class="font-bold text-lg">Gestión de Nichos</h4>
-                        <p class="text-sm text-gray-600">Consulta, agrega o modifica los nichos disponibles.</p>
+                    <!-- Gestión de Nichos -->
+                    <a href="{{ route('nichos.index') }}">
+                        <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
+                            <h2 class="font-semibold text-lg">Gestión de Nichos</h2>
+                            <p class="text-sm text-gray-600">Consulta, agrega o modifica los nichos disponibles.</p>
+                        </div>
                     </a>
 
                     <a href="#" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
@@ -38,10 +41,10 @@
                     </a>
 
                     @if (Auth::user()->rol->id === 1)
-                        <a href="{{ route('admin.user-roles.index') }}" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
-                            <h4 class="font-bold text-lg">Gestión de Roles</h4>
-                            <p class="text-sm text-gray-600">Visualiza y cambia roles de los usuarios.</p>
-                        </a>
+                    <a href="{{ route('admin.user-roles.index') }}" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
+                        <h4 class="font-bold text-lg">Gestión de Roles</h4>
+                        <p class="text-sm text-gray-600">Visualiza y cambia roles de los usuarios.</p>
+                    </a>
                     @endif
                 </div>
 

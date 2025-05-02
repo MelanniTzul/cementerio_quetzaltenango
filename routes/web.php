@@ -36,30 +36,46 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 });
 
 
-    Route::get('/admin/user-roles', [UserRoleController::class, 'index'])->name('admin.user-roles.index' ) ->middleware('is_admin');
-    Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
-        Route::get('/user-roles', [UserRoleController::class, 'index'])->name('admin.user-roles.index');
-        Route::put('/user-roles/{user}/change-role', [UserRoleController::class, 'changeRole'])->name('admin.changeRole');
-    });
+Route::get('/admin/user-roles', [UserRoleController::class, 'index'])->name('admin.user-roles.index')->middleware('is_admin');
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+    Route::get('/user-roles', [UserRoleController::class, 'index'])->name('admin.user-roles.index');
+    Route::put('/user-roles/{user}/change-role', [UserRoleController::class, 'changeRole'])->name('admin.changeRole');
+});
 
 
-    Route::middleware(['auth', 'role:Administrador'])->group(function () {
-        Route::get('/admin/gestion-nichos', [NichoController::class, 'index'])->name('nichos.index');
-    });
+Route::middleware(['auth', 'role:Administrador'])->group(function () {
+    Route::get('/admin/gestion-nichos', [NichoController::class, 'index'])->name('nichos.index');
+});
 
-    Route::middleware(['auth', 'role:Ayudante'])->group(function () {
-        Route::get('/ayudante/reportes', [ReporteController::class, 'basicos'])->name('reportes.basicos');
-    });
+Route::middleware(['auth', 'role:Ayudante'])->group(function () {
+    Route::get('/ayudante/reportes', [ReporteController::class, 'basicos'])->name('reportes.basicos');
+});
 
-    Route::middleware(['auth', 'role:Auditor'])->group(function () {
-        Route::get('/auditor/reportes', [ReporteController::class, 'auditoria'])->name('reportes.auditoria');
-    });
+Route::middleware(['auth', 'role:Auditor'])->group(function () {
+    Route::get('/auditor/reportes', [ReporteController::class, 'auditoria'])->name('reportes.auditoria');
+});
 
-    Route::middleware(['auth', 'role:Usuario de Consulta'])->group(function () {
-        Route::get('/consulta/visualizar', [ConsultaController::class, 'index'])->name('consulta.index');
-    });
+Route::middleware(['auth', 'role:Usuario de Consulta'])->group(function () {
+    Route::get('/consulta/visualizar', [ConsultaController::class, 'index'])->name('consulta.index');
+});
+//optener
+Route::get('/gestion-nichos', [NichoController::class, 'index'])
+    ->name('nichos.index')
+    ->middleware('is_admin');
+//ver vista
+Route::get('/gestion-nichos/crear', [NichoController::class, 'create'])
+    ->name('nichos.create')
+    ->middleware('is_admin');
+//guardar
+Route::post('/gestion-nichos', [NichoController::class, 'store'])
+    ->name('nichos.store')
+    ->middleware('is_admin');
+//editar
+    Route::get('/admin/gestion-nichos/{nicho}/editar', [NichoController::class, 'edit'])->name('nichos.edit')->middleware('is_admin');
+    Route::put('/admin/gestion-nichos/{nicho}', [NichoController::class, 'update'])->name('nichos.update')->middleware('is_admin');
 
 
 
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
