@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\NichoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ConsultaController;
-
+use App\Http\Controllers\ContratoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,7 +75,24 @@ Route::post('/gestion-nichos', [NichoController::class, 'store'])
     Route::put('/admin/gestion-nichos/{nicho}', [NichoController::class, 'update'])->name('nichos.update')->middleware('is_admin');
 
 
+//Contrato
 
+// Ruta para ver todos los contratos
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index')->middleware('is_admin');
+// Ruta para mostrar formulario de creación
+Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create')->middleware('is_admin');
+
+// Ruta para guardar un nuevo contrato
+Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store')->middleware('is_admin');
+
+// Ruta para mostrar formulario de edición
+Route::get('/contratos/{id}/edit', [ContratoController::class, 'edit'])->name('contratos.edit')->middleware('is_admin');
+
+// Ruta para actualizar un contrato existente
+Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('contratos.update')->middleware('is_admin');
+
+// Ruta para ver los detalles de un contrato (opcional)
+// Route::get('/contratos/{id}', [ContratoController::class, 'show'])->name('contratos.show');
 
 
 require __DIR__ . '/auth.php';

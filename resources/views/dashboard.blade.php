@@ -29,8 +29,20 @@
                             <p class="text-sm text-gray-600">Consulta, agrega o modifica los nichos disponibles.</p>
                         </div>
                     </a>
+                    <a href="{{ route('nichos.index') }}">
+                        <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
+                            <h2 class="font-semibold text-lg">Creación Ocupantes</h2>
+                            <p class="text-sm text-gray-600">Crea ocupante para nicho.</p>
+                        </div>
+                    </a>
+                    <a href="{{ route('nichos.index') }}">
+                        <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
+                            <h2 class="font-semibold text-lg">Creación Responsables</h2>
+                            <p class="text-sm text-gray-600">Crea, Responsable para los nicho.</p>
+                        </div>
+                    </a>
 
-                    <a href="#" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
+                    <a href="{{ route('contratos.index') }}" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
                         <h4 class="font-bold text-lg">Contratos</h4>
                         <p class="text-sm text-gray-600">Administra los contratos activos y vencidos.</p>
                     </a>
