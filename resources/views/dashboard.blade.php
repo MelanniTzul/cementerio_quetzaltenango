@@ -22,6 +22,7 @@
                 <h3 class="text-2xl font-bold mb-6">Menu</h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 2)
                     <!-- Gestión de Nichos -->
                     <a href="{{ route('nichos.index') }}">
                         <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
@@ -29,29 +30,46 @@
                             <p class="text-sm text-gray-600">Consulta, agrega o modifica los nichos disponibles.</p>
                         </div>
                     </a>
+                    @endif
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 2)
                     <a href="{{ route('ocupantes.store') }}">
                         <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
                             <h2 class="font-semibold text-lg">Creación Ocupantes</h2>
                             <p class="text-sm text-gray-600">Crea ocupante para nicho.</p>
                         </div>
                     </a>
+                    @endif
+
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 2)
                     <a href="{{ route('responsables.index') }}">
                         <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
                             <h2 class="font-semibold text-lg">Creación Responsables</h2>
                             <p class="text-sm text-gray-600">Crea, Responsable para los nicho.</p>
                         </div>
                     </a>
+                    @endif
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 2)
 
                     <a href="{{ route('contratos.index') }}" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
                         <h4 class="font-bold text-lg">Contratos</h4>
                         <p class="text-sm text-gray-600">Administra los contratos activos y vencidos.</p>
                     </a>
+                    @endif
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 3)
+                    <a href="{{ route('exhumacion.index') }}">
+                        <div class="p-4 border rounded shadow-sm hover:bg-gray-100">
+                            <h2 class="font-semibold text-lg">Gestión de Exhumaciones</h2>
+                            <p class="text-sm text-gray-600">Registra y consulta solicitudes de exhumación.</p>
+                        </div>
+                    </a>
+                    @endif
 
+                    @if (Auth::user()->rol->id === 1 || Auth::user()->rol->id === 3)
                     <a href="#" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
                         <h4 class="font-bold text-lg">Reportes</h4>
                         <p class="text-sm text-gray-600">Visualiza reportes por fecha, usuario o tipo.</p>
                     </a>
-
+                    @endif
                     @if (Auth::user()->rol->id === 1)
                     <a href="{{ route('admin.user-roles.index') }}" class="bg-blue-100 hover:bg-blue-200 transition p-5 rounded shadow text-center">
                         <h4 class="font-bold text-lg">Gestión de Roles</h4>

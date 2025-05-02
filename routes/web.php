@@ -7,6 +7,7 @@ use App\Http\Controllers\NichoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\ExhumacionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,7 +62,7 @@ Route::middleware(['auth', 'role:Usuario de Consulta'])->group(function () {
 //optener
 Route::get('/gestion-nichos', [NichoController::class, 'index'])
     ->name('nichos.index')
-    ->middleware('is_admin');
+    ->middleware('gestion_nichos');
 //ver vista
 Route::get('/gestion-nichos/crear', [NichoController::class, 'create'])
     ->name('nichos.create')
@@ -78,18 +79,18 @@ Route::post('/gestion-nichos', [NichoController::class, 'store'])
 //Contrato
 
 // Ruta para ver todos los contratos
-Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index')->middleware('is_admin');
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index')->middleware('contratos');
 // Ruta para mostrar formulario de creación
-Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create')->middleware('is_admin');
+Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create')->middleware('contratos');
 
 // Ruta para guardar un nuevo contrato
-Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store')->middleware('is_admin');
+Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store')->middleware('contratos');
 
 // Ruta para mostrar formulario de edición
-Route::get('/contratos/{id}/edit', [ContratoController::class, 'edit'])->name('contratos.edit')->middleware('is_admin');
+Route::get('/contratos/{id}/edit', [ContratoController::class, 'edit'])->name('contratos.edit')->middleware('contratos');
 
 // Ruta para actualizar un contrato existente
-Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('contratos.update')->middleware('is_admin');
+Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('contratos.update')->middleware('contratos');
 
 // Ruta para ver los detalles de un contrato (opcional)
 // Route::get('/contratos/{id}', [ContratoController::class, 'show'])->name('contratos.show');
@@ -99,42 +100,59 @@ use App\Http\Controllers\ResponsableController;
 
 //ocupante
 // Ver formulario de creación
-Route::get('/ocupantes/create', [OcupanteController::class, 'create'])->name('ocupantes.create')->middleware('is_admin');
+Route::get('/ocupantes/create', [OcupanteController::class, 'create'])->name('ocupantes.create')->middleware('gestion_ocupantes');
 
 // Guardar ocupante (crear)
-Route::post('/ocupantes', [OcupanteController::class, 'store'])->name('ocupantes.store')->middleware('is_admin');
+Route::post('/ocupantes', [OcupanteController::class, 'store'])->name('ocupantes.store')->middleware('gestion_ocupantes');
 
 // Ver formulario de edición
-Route::get('/ocupantes/{id}/edit', [OcupanteController::class, 'edit'])->name('ocupantes.edit')->middleware('is_admin');
+Route::get('/ocupantes/{id}/edit', [OcupanteController::class, 'edit'])->name('ocupantes.edit')->middleware('gestion_ocupantes');
 
 // Actualizar ocupante
-Route::put('/ocupantes/{id}', [OcupanteController::class, 'update'])->name('ocupantes.update')->middleware('is_admin');
+Route::put('/ocupantes/{id}', [OcupanteController::class, 'update'])->name('ocupantes.update')->middleware('gestion_ocupantes');
 
 // Ver vista de un ocupante (detalle)
-Route::get('/ocupantes/{id}', [OcupanteController::class, 'show'])->name('ocupantes.show')->middleware('is_admin');
+Route::get('/ocupantes/{id}', [OcupanteController::class, 'show'])->name('ocupantes.show')->middleware('gestion_ocupantes');
 
 // (Opcional) Listar todos
-Route::get('/ocupantes', [OcupanteController::class, 'index'])->name('ocupantes.index')->middleware('is_admin');
+Route::get('/ocupantes', [OcupanteController::class, 'index'])->name('ocupantes.index')->middleware('gestion_ocupantes');
 
   // Eliminar (borrado lógico)
-  Route::delete('/ocupantes/{id}', [OcupanteController::class, 'destroy'])->name('ocupantes.destroy')->middleware('is_admin');
+  Route::delete('/ocupantes/{id}', [OcupanteController::class, 'destroy'])->name('ocupantes.destroy')->middleware('gestion_ocupantes');
 
 // Mostrar formulario de creación
-Route::get('/responsables/create', [ResponsableController::class, 'create'])->name('responsables.create');
+Route::get('/responsables/create', [ResponsableController::class, 'create'])->name('responsables.create')->middleware('responsable');
 
 // Guardar nuevo responsable
-Route::post('/responsables', [ResponsableController::class, 'store'])->name('responsables.store');
+Route::post('/responsables', [ResponsableController::class, 'store'])->name('responsables.store')->middleware('responsable');
 
 // Mostrar formulario de edición
-Route::get('/responsables/{id}/edit', [ResponsableController::class, 'edit'])->name('responsables.edit');
+Route::get('/responsables/{id}/edit', [ResponsableController::class, 'edit'])->name('responsables.edit')->middleware('responsable');
 
 // Actualizar responsable
-Route::put('/responsables/{id}', [ResponsableController::class, 'update'])->name('responsables.update');
+Route::put('/responsables/{id}', [ResponsableController::class, 'update'])->name('responsables.update')->middleware('responsable');
 
 // Ver lista de responsables
-Route::get('/responsables', [ResponsableController::class, 'index'])->name('responsables.index');
+Route::get('/responsables', [ResponsableController::class, 'index'])->name('responsables.index')->middleware('responsable');
 
 // (Opcional) Ver detalle de un responsable
-Route::get('/responsables/{id}', [ResponsableController::class, 'show'])->name('responsables.show');
+Route::get('/responsables/{id}', [ResponsableController::class, 'show'])->name('responsables.show')->middleware('responsable');
+
+
+ // Listado
+ Route::get('/exhumaciones', [ExhumacionController::class, 'index'])->name('exhumacion.index')->middleware('is_admin');
+
+ // Formulario para crear
+ Route::get('/exhumaciones/create', [ExhumacionController::class, 'create'])->name('exhumacion.create')->middleware('is_admin');
+
+ // Guardar nueva exhumación
+ Route::post('/exhumaciones', [ExhumacionController::class, 'store'])->name('exhumacion.store')->middleware('is_admin');
+
+ // Formulario para editar (si decides implementarlo)
+ Route::get('/exhumaciones/{id}/edit', [ExhumacionController::class, 'edit'])->name('exhumacion.edit')->middleware('is_admin');
+
+ Route::put('/exhumaciones/update/{id}', [ExhumacionController::class, 'update'])->name('exhumacion.update')->middleware('is_admin');
+
+ Route::delete('/exhumaciones/{id}', [ExhumacionController::class, 'destroy'])->name('exhumacion.destroy')->middleware('is_admin');
 
   require __DIR__ . '/auth.php';

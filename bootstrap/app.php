@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'is_admin' => \App\Http\Middleware\IsAdmin::class,
             'auth' => \App\Http\Middleware\Authenticate::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'gestion_nichos' => \App\Http\Middleware\GestionNichos::class,
+            'gestion_ocupantes' => \App\Http\Middleware\GestionOcupantes::class,
+            'responsable' => \App\Http\Middleware\Responsable::class,
+            'contratos' => \App\Http\Middleware\Contratos::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
